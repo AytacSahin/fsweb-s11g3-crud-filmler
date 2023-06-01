@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
-import axios from "axios";
+import useAxios, { REQ_TYPES } from "../hooks/useAxios";
 
 const Movie = (props) => {
-  const { addToFavorites } = props;
-
-  const [movie, setMovie] = useState("");
-
+  const { addToFavorites, deleteMovie } = props;
+  const [getData, movie] = useAxios();
   const { id } = useParams();
-  const { push } = useHistory();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:9000/api/movies/${id}`)
-      .then((res) => {
-        setMovie(res.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    getData({
+      endpoint: `/api/movies/${id}`,
+      reqType: REQ_TYPES.GET,
+    })
+    console.log(movie)
   }, [id]);
 
   return (
@@ -51,7 +45,7 @@ const Movie = (props) => {
       </div>
 
       <div className="px-5 py-3 border-t border-zinc-200 flex justify-end gap-2">
-        <button className="myButton bg-blue-600 hover:bg-blue-500 ">
+        <button onClick={() => addToFavorites(movie)}className="myButton bg-blue-600 hover:bg-blue-500 ">
           Favorilere ekle
         </button>
         <Link
@@ -60,7 +54,7 @@ const Movie = (props) => {
         >
           Edit
         </Link>
-        <button type="button" className="myButton bg-red-600 hover:bg-red-500">
+        <button onClick={() => deleteMovie(id)} type="button" className="myButton bg-red-600 hover:bg-red-500">
           Sil
         </button>
       </div>

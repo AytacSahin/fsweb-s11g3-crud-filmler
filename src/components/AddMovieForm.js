@@ -3,14 +3,12 @@ import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useAxios, { REQ_TYPES } from "../hooks/useAxios";
 
-const EditMovieForm = (props) => {
-
+const AddMovieForm = (props) => {
   const { push } = useHistory();
-  const { id } = useParams();
-  const [editData] = useAxios();
-  const [getData] = useAxios();
-  const { setMovies } = props;
+  const [setData] = useAxios();
+  const [favMovies, setFavMovies] = useState([]);
 
+  const { setMovies } = props;
   const [movie, setMovie] = useState({
     title: "",
     director: "",
@@ -28,24 +26,15 @@ const EditMovieForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    editData({
-      endpoint: `/api/movies/${id}`,
-      reqType: REQ_TYPES.PUT,
+    setData({
+      endpoint: `/api/movies`,
+      reqType: REQ_TYPES.POST,
       payload: movie,
     }).then((res) => {
       setMovies(res);
-      push(`/movies/${movie.id}`)
+      push(`/movies`)
     })
-  }
-  useEffect(() => {
-    getData({
-      endpoint: `/api/movies/${id}`,
-      reqType: REQ_TYPES.GET,
-    }).then((res) => {
-      setMovie(res);
-      console.log("res burada:", res)
-    })
-  }, []);
+  };
 
   const { title, director, genre, metascore, description } = movie;
 
@@ -53,7 +42,7 @@ const EditMovieForm = (props) => {
     <div className="bg-white rounded-md shadow flex-1">
       <form onSubmit={handleSubmit}>
         <div className="p-5 pb-3 border-b border-zinc-200">
-          <h4 className="text-xl font-bold">Düzenleniyor: <strong>{movie.title}</strong></h4>
+          <h4 className="text-xl font-bold">Yeni Bir Film Ekle <strong>{movie.title}</strong></h4>
         </div>
 
         <div className="px-5 py-3">
@@ -104,7 +93,7 @@ const EditMovieForm = (props) => {
         </div>
 
         <div className="px-5 py-4 border-t border-zinc-200 flex justify-end gap-2">
-          <Link to={`/movies/${id}`} className="myButton bg-zinc-500">
+          <Link to={`/movies`} className="myButton bg-zinc-500">
             Vazgeç
           </Link>
           <button
@@ -119,4 +108,4 @@ const EditMovieForm = (props) => {
   );
 };
 
-export default EditMovieForm;
+export default AddMovieForm;
