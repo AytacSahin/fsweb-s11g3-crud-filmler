@@ -16,9 +16,8 @@ const App = () => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const [deleteMov] = useAxios();
   const [getData] = useAxios();
-
   const { push } = useHistory();
-
+ 
   useEffect(() => {
     getData({
       endpoint: `/api/movies`,
@@ -74,6 +73,7 @@ const App = () => {
               <Redirect to="/movies" />
             </Route>
           </Switch>
+
         </div>
       </div>
     </div>
