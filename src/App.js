@@ -20,7 +20,7 @@ const App = () => {
  
   useEffect(() => {
     getData({
-      endpoint: `/api/movies`,
+      endpoint: `/movies`,
       reqType: REQ_TYPES.GET,
     }).then((res) => {
       setMovies(res);
@@ -29,7 +29,7 @@ const App = () => {
 
   const deleteMovie = (id) => {
     deleteMov({
-      endpoint: `/api/movies/${id}`,
+      endpoint: `/movies/${id}`,
       reqType: REQ_TYPES.DELETE,
     }).then((res) => {
       setMovies(res);

@@ -27,7 +27,7 @@ const AddMovieForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setData({
-      endpoint: `/api/movies`,
+      endpoint: `/movies`,
       reqType: REQ_TYPES.POST,
       payload: movie,
     }).then((res) => {

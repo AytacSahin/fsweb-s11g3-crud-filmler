@@ -29,7 +29,7 @@ const EditMovieForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     editData({
-      endpoint: `/api/movies/${id}`,
+      endpoint: `/movies/${id}`,
       reqType: REQ_TYPES.PUT,
       payload: movie,
     }).then((res) => {
@@ -39,7 +39,7 @@ const EditMovieForm = (props) => {
   }
   useEffect(() => {
     getData({
-      endpoint: `/api/movies/${id}`,
+      endpoint: `/movies/${id}`,
       reqType: REQ_TYPES.GET,
     }).then((res) => {
       setMovie(res);

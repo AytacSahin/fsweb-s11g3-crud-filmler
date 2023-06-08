@@ -10,7 +10,7 @@ const Movie = (props) => {
 
   useEffect(() => {
     getData({
-      endpoint: `/api/movies/${id}`,
+      endpoint: `/movies/${id}`,
       reqType: REQ_TYPES.GET,
     })
     console.log(movie)

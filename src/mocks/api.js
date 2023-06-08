@@ -8,22 +8,22 @@ api.use(express.json());
 
 api.use(cors());
 
-api.get('/api/movies', (req, res) => {
+api.get('/movies', (req, res) => {
   res.json(Data.getAll())
 })
 
 //Get Post Endpoint
-api.get('/api/movies/:id',(req, res) => {
+api.get('/movies/:id',(req, res) => {
   res.json(Data.getById(req.params.id))
 })
 
 //Create Post Endpoint
-api.post('/api/movies', (req, res) => {
+api.post('/movies', (req, res) => {
   res.json(Data.create(req.body))
 })
 
 //Edit Post Endpoint
-api.put('/api/movies/:id', (req, res) => {
+api.put('/movies/:id', (req, res) => {
   res.json(Data.edit(req.params.id, req.body))
 })
 
